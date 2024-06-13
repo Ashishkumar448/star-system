@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noisy Trail and Neutron Star</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+    }
+    canvas {
+        display: block;
+        margin: auto;
+        background-color: black;
+    }
+    .asteroid1{
+    position:fixed;
+    z-index:20;
+    top:210px;
+    right: 180px;
+    width:25%;
+    height:25%; background-image:url("https://www.dropbox.com/s/cb6zms2zhpgk3g1/unnamed%20%284%29.gif?dl=1");
+    background-repeat:no-repeat;
+    background-size:10%;
+    background-color: ;
+    background-position:center;
+    color:transparent;   
+    animation:orbit;
+  -webkit-animation-fill-mode: forwards;
+  animation-duration: 15s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;    
+}    
+
+@keyframes orbit {
+from {width:10%;height:10%;z-index:-20;}    
+25% {width:25%;height:25%;z-index:12;}
+50% {width:50%;height:50%;z-index:25;}
+80% {width:70%;height:70%;z-index:45;}
+to {width:10%;height:10%;z-index:0;}     
+}
+
+.asteroid2{
+    position:fixed;
+    z-index:20;
+    bottom:250px;
+    left: 180px;
+    width:25%;
+    height:25%; background-image:url("https://www.dropbox.com/s/cb6zms2zhpgk3g1/unnamed%20%284%29.gif?dl=1");
+    background-repeat:no-repeat;
+    background-size:10%;
+    background-color: ;
+    background-position:center;
+    color:transparent;   
+    animation:orbit;
+  -webkit-animation-fill-mode: forwards;
+  animation-duration: 15s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;    
+}    
+
+@keyframes orbit {
+from {width:10%;height:10%;z-index:-20;}    
+25% {width:25%;height:25%;z-index:12;}
+50% {width:50%;height:50%;z-index:25;}
+80% {width:70%;height:70%;z-index:45;}
+to {width:10%;height:10%;z-index:0;}     
+}
+
+.asteroid3{
+    position:fixed;
+    z-index:20;
+    bottom:150px;
+    left: 18px;
+    width:25%;
+    height:25%; background-image:url("https://www.dropbox.com/s/jbw735p1m0wtiyl/asteroid-clipart-transparent-background-17.gif?dl=1");
+    background-repeat:no-repeat;
+    background-size:10%;
+    background-color: ;
+    background-position:center;
+    color:transparent;   
+    animation:orbit;
+  -webkit-animation-fill-mode: forwards;
+  animation-duration: 15s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;    
+}    
+
+@keyframes orbit {
+from {width:10%;height:10%;z-index:-20;}    
+25% {width:25%;height:25%;z-index:12;}
+50% {width:50%;height:50%;z-index:25;}
+80% {width:70%;height:70%;z-index:45;}
+to {width:10%;height:10%;z-index:0;}     
+}
+
+
+.asteroid4{
+    position:fixed;
+    z-index:20;
+    bottom:280px;
+    right:50px;
+    width:35%;
+    height:35%; background-image:url("https://www.dropbox.com/s/213henssgj6v5um/LeanPoisedFlamingo-max-1mb.gif?dl=1");
+    background-repeat:no-repeat;
+    background-size:20%;
+    background-color: ;
+    background-position:center;
+    color:transparent;   
+    animation:orbit;
+  -webkit-animation-fill-mode: forwards;
+  animation-duration: 20s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;    
+}    
+
+@keyframes orbit {
+from {width:10%;height:10%;z-index:-10;}    
+25% {width:25%;height:25%;z-index:12;}
+50% {width:50%;height:50%;z-index:25;}
+80% {width:70%;height:70%;z-index:85;}
+to {width:10%;height:10%;z-index:0;}     
+}
+
+
+.asteroid5{
+    position:fixed;
+    z-index:20;
+    top:228px;
+    left:50px;
+    width:35%;
+    height:35%; background-image:url("https://www.dropbox.com/s/jbw735p1m0wtiyl/asteroid-clipart-transparent-background-17.gif?dl=1");
+    background-repeat:no-repeat;
+    background-size:20%;
+    background-color: ;
+    background-position:center;
+    color:transparent;   
+    animation:orbit;
+  -webkit-animation-fill-mode: forwards;
+  animation-duration: 20s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;    
+}    
+
+@keyframes orbit {
+from {width:10%;height:10%;z-index:-10;}    
+25% {width:25%;height:25%;z-index:12;}
+50% {width:50%;height:50%;z-index:25;}
+80% {width:70%;height:70%;z-index:85;}
+to {width:10%;height:10%;z-index:0;}     
+}
+
+</style>
+</head>
+<body>
+<div class= "asteroid1" ></div>
+<div class= "asteroid2" ></div>
+<div class= "asteroid3" ></div>
+<div class= "asteroid4" ></div>
+<div class= "asteroid5" ></div>
+<canvas id="myCanvas"></canvas>
+<script>
+window.onload = function() {
+    // Get the canvas element
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // Set canvas size to the window size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Set the center of the circular path
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+
+    // Set the radius and initial angle
+    var radius = Math.min(canvas.width, canvas.height) * 0.4;
+    var angle = 0;
+
+    // Array to store the tail particles
+    var tailParticles = [];
+
+    // Neutron star parameters
+    var neutronStar = {
+        x: centerX,
+        y: centerY,
+        radius: 50,
+        color: "white",
+        glowColor: "rgba(255, 255, 255, 0.5)"
+    };
+
+    // Starry background parameters
+    var numStars = 200;
+    var stars = [];
+
+    // Function to generate random stars
+    function generateStars() {
+        for (var i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2
+            });
+        }
+    }
+
+    // Function to draw a single star
+    function drawStar(star) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+    }
+
+    // Function to draw the starry background
+    function drawBackground() {
+        for (var i = 0; i < stars.length; i++) {
+            drawStar(stars[i]);
+        }
+    }
+
+    // Function to draw the neutron star
+    function drawNeutronStar() {
+        ctx.beginPath();
+        var gradient = ctx.createRadialGradient(neutronStar.x, neutronStar.y, 0, neutronStar.x, neutronStar.y, neutronStar.radius);
+        gradient.addColorStop(0, neutronStar.color);
+        gradient.addColorStop(1, neutronStar.glowColor);
+        ctx.arc(neutronStar.x, neutronStar.y, neutronStar.radius, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+    }
+
+    // Function to draw a single tail particle
+    function drawTailParticle(x, y, size, opacity) {
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 0, 0, " + opacity + ")";
+        ctx.fill();
+    }
+
+    // Function to draw the tail
+    function drawTail() {
+        for (var i = 0; i < tailParticles.length; i++) {
+            var particle = tailParticles[i];
+            drawTailParticle(particle.x, particle.y, particle.size, particle.opacity);
+            particle.opacity *= 0.95; // Fade out the particle
+        }
+    }
+
+    // Function to add a new tail particle
+    function addTailParticle(x, y) {
+        tailParticles.push({
+            x: x,
+            y: y,
+            size: Math.random() * 3 + 1, // Random size between 1 and 4
+            opacity: Math.random() * 0.8 + 0.2 // Random opacity between 0.2 and 1
+        });
+    }
+
+    // Function to draw the dot at given polar coordinates
+    function drawDot(x, y) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        drawBackground(); // Draw the starry background
+        drawNeutronStar(); // Draw the neutron star
+
+        // Draw the tail
+        drawTail();
+
+        // Draw the dot at the new coordinates
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = "red";
+        ctx.fill();
+
+        // Add a new tail particle
+        addTailParticle(x, y);
+    }
+
+    // Function to update the position of the dot
+    function update() {
+        // Calculate the new polar coordinates
+        var x = centerX + radius * Math.cos(angle);
+        var y = centerY + radius * Math.sin(angle);
+
+        // Draw the dot at the new coordinates
+        drawDot(x, y);
+
+        // Increase the angle for next frame
+        angle += 0.02;
+
+        // Request animation frame
+        requestAnimationFrame(update);
+    }
+
+    // Generate starry background
+    generateStars();
+
+    // Start the animation
+    update();
+    };
+</script>
+</body>
+</html>
